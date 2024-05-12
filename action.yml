@@ -4,6 +4,10 @@ inputs:
     description: 'Install OSS CAD Suite.'
     required: false
     default: false
+  github-token:
+    description: 'GitHub token used by YosysHQ/setup-oss-cad-suite.'
+    required: false
+
 runs:
   using: 'composite'
   steps:
@@ -21,17 +25,19 @@ runs:
 
   - name: Build and install Chryse locally
     run: sbt publishLocal
+    shell: bash
 
   - name: Build and install Chryse's SBT plugin locally
     run: sbt 'sbtchryse / publishLocal'
+    shell: bash
 
   - name: Install OSS CAD Suite
     if: ${{ inputs.install-oss-cad-suite }}
     uses: YosysHQ/setup-oss-cad-suite@v3
     with:
-      github-token: ${{ secrets.GITHUB_TOKEN }}
+      github-token: ${{ inputs.github-token }}
 
   - name: Report Yosys version
     if: ${{ inputs.install-oss-cad-suite }}
     run: yosys --version
-
+    shell: bash
