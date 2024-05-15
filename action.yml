@@ -27,10 +27,6 @@ runs:
     run: sbt publishLocal
     shell: bash
 
-  - name: Build and install Chryse's SBT plugin locally
-    run: sbt 'sbtchryse / publishLocal'
-    shell: bash
-
   - name: Install OSS CAD Suite
     if: ${{ inputs.install-oss-cad-suite }}
     uses: YosysHQ/setup-oss-cad-suite@v3
