@@ -3,7 +3,6 @@ inputs:
   install-oss-cad-suite:
     description: 'Install OSS CAD Suite.'
     required: false
-    default: false
   github-token:
     description: 'GitHub token used by YosysHQ/setup-oss-cad-suite.'
     required: false
