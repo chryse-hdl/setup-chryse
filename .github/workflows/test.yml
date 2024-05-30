@@ -9,5 +9,5 @@ jobs:
       - name: Set up Chryse (use this repo)
         uses: ./.
 
-      - name: Ensure sbt is found
+      - name: Ensure sbt is found by calling action
         run: sbt --version
