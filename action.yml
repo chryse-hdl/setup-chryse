@@ -29,7 +29,7 @@ runs:
     run: |
       wget -q https://github.com/sbt/sbt/releases/download/v1.9.8/sbt-1.9.8.tgz
       tar -C setup-chryse-out -xf sbt-1.9.8.tgz
-      sudo ln -s "$PWD/setup-chryse-out/sbt/bin/sbt" /usr/bin/sbt
+      sudo ln -fs "$PWD/setup-chryse-out/sbt/bin/sbt" /usr/bin/sbt
     shell: bash
 
   - name: Install Verilator
