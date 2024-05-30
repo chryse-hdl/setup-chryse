@@ -1,8 +1,10 @@
 name: 'Setup Chryse'
+
 inputs:
   install-oss-cad-suite:
     description: 'Install OSS CAD Suite.'
     required: false
+
   github-token:
     description: 'GitHub token used by YosysHQ/setup-oss-cad-suite.'
     required: false
@@ -21,6 +23,16 @@ runs:
       java-version: '22'
       distribution: 'temurin'
       cache: 'sbt'
+
+  - name: Install sbt
+    run: |
+      wget https://github.com/sbt/sbt/releases/download/v1.9.8/sbt-1.9.8.tgz
+      tar xf sbt-1.9.8.tgz
+      echo "$PWD/sbt/bin" >> $GITHUB_PATH
+
+  - name: Install Verilator
+    if: ${{ ! inputs.install-oss-cad-suite }}
+    run: sudo apt-get install -y verilator
 
   - name: Build and install Chryse locally
     run: sbt publishLocal
