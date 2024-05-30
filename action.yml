@@ -28,7 +28,7 @@ runs:
     run: |
       wget -q https://github.com/sbt/sbt/releases/download/v1.9.8/sbt-1.9.8.tgz
       tar xf sbt-1.9.8.tgz
-      echo "$PWD/sbt/bin" >> $GITHUB_PATH
+      sudo ln -s "$PWD/sbt/bin/sbt" /usr/bin/sbt
     shell: bash
 
   - name: Install Verilator

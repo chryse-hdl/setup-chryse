@@ -1,0 +1,13 @@
+on: [push]
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Chryse (use this repo)
+        uses: .
+
+      - name: Ensure sbt is found
+        run: sbt --version
