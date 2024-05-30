@@ -16,7 +16,7 @@ runs:
     uses: actions/checkout@v4
     with:
       repository: chryse-hdl/chryse
-      path: ../chryse
+      path: setup-chryse-out/chryse
 
   - name: Set up JDK 22
     uses: actions/setup-java@v4
@@ -28,8 +28,8 @@ runs:
   - name: Install sbt
     run: |
       wget -q https://github.com/sbt/sbt/releases/download/v1.9.8/sbt-1.9.8.tgz
-      tar xf sbt-1.9.8.tgz ../
-      sudo ln -s "$PWD/../sbt/bin/sbt" /usr/bin/sbt
+      tar -C setup-chryse-out xf sbt-1.9.8.tgz
+      sudo ln -s "$PWD/setup-chryse-out/sbt/bin/sbt" /usr/bin/sbt
     shell: bash
 
   - name: Install Verilator
@@ -38,7 +38,7 @@ runs:
     shell: bash
 
   - name: Build and install Chryse locally
-    run: cd ../chryse && sbt publishLocal
+    run: cd setup-chryse-out/chryse && sbt publishLocal
     shell: bash
 
   - name: Install OSS CAD Suite
