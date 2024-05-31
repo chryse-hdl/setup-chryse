@@ -45,3 +45,13 @@ Clone [Chryse] and `sbt publishLocal` a particular ref of it.
   with:
     source-ref: main
 ```
+
+## Rationale
+
+* ChiselSim depends on Verilator 5.x in all but the simplest usage.
+* The `ubuntu-22.04` GitHub Actions runner (current `ubuntu-latest`) includes `sbt` in the base image, but the Verilator in apt is 4.x.
+* The `ubuntu-24.04` runner has Verilator 5.x in apt, but no `sbt`. -_-
+
+I'm preferring getting ready for 24.04 sooner, so we fetch `sbt` manually, and install Verilator from apt if we're not obtaining OSS CAD Suite (which bundles it).
+
+We don't need OSS CAD Suite if we're not synthesising, and [YosysHQ/setup-oss-cad-suite]'s use of the GitHub API means it's pretty easy to trigger API rate-limits even when providing a token! So I try to make it easy to avoid it.
