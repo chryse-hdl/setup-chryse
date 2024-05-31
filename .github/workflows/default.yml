@@ -3,7 +3,7 @@ name: Test default setup
 on: [push]
 
 jobs:
-  test-source-ref:
+  test-default:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
