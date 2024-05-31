@@ -1,13 +1,17 @@
+name: Test source-ref
+
 on: [push]
 
 jobs:
-  test:
+  test-source-ref:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v4
 
       - name: Set up Chryse (use this repo)
         uses: ./.
+        with:
+          source-ref: main
 
       - name: Ensure sbt is found by calling action
         run: sbt --version

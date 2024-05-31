@@ -1,9 +1,8 @@
 name: 'Setup Chryse'
 
 inputs:
-  ref:
-    description: Chryse branch, tag or SHA to checkout.
-    default: main
+  source-ref:
+    description: Chryse branch, tag or SHA to checkout. Leave blank to not install locally.
 
   install-oss-cad-suite:
     description: 'Install OSS CAD Suite.'
@@ -17,11 +16,12 @@ runs:
   using: 'composite'
   steps:
   - name: Checkout Chryse
+    if: ${{ inputs.source-ref }}
     uses: actions/checkout@v4
     with:
       repository: chryse-hdl/chryse
       path: setup-chryse-out/chryse
-      ref: ${{ inputs.ref }}
+      ref: ${{ inputs.source-ref }}
 
   - name: Set up JDK 22
     uses: actions/setup-java@v4
@@ -33,6 +33,7 @@ runs:
   - name: Install sbt
     run: |
       wget -q https://github.com/sbt/sbt/releases/download/v1.9.8/sbt-1.9.8.tgz
+      mkdir -p setup-chryse-out
       tar -C setup-chryse-out -xf sbt-1.9.8.tgz
       sudo ln -fs "$PWD/setup-chryse-out/sbt/bin/sbt" /usr/bin/sbt
     shell: bash
@@ -43,6 +44,7 @@ runs:
     shell: bash
 
   - name: Build and install Chryse locally
+    if: ${{ inputs.source-ref }}
     run: cd setup-chryse-out/chryse && sbt publishLocal
     shell: bash
 
