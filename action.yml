@@ -4,6 +4,9 @@ inputs:
   source-ref:
     description: Chryse branch, tag or SHA to checkout. Leave blank to not install locally.
 
+  athena-source-ref:
+    description: Athena branch, tag or SHA to checkout. Leave blank to not install locally.
+
   install-oss-cad-suite:
     description: 'Install OSS CAD Suite.'
     required: false
@@ -46,6 +49,19 @@ runs:
   - name: Build and install Chryse locally
     if: ${{ inputs.source-ref }}
     run: cd setup-chryse-out/chryse && sbt publishLocal
+    shell: bash
+
+  - name: Checkout Athena
+    if: ${{ inputs.athena-source-ref }}
+    uses: actions/checkout@v4
+    with:
+      repository: chryse-hdl/athena
+      path: setup-chryse-out/athena
+      ref: ${{ inputs.athenasource-ref }}
+
+  - name: Build and install Athena locally
+    if: ${{ inputs.athena-source-ref }}
+    run: cd setup-chryse-out/athena && sbt publishLocal
     shell: bash
 
   - name: Install OSS CAD Suite
