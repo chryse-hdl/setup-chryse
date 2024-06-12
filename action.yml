@@ -8,12 +8,13 @@ inputs:
     description: Athena branch, tag or SHA to checkout. Leave blank to not install locally.
 
   install-oss-cad-suite:
-    description: 'Install OSS CAD Suite.'
-    required: false
+    description: Install OSS CAD Suite.
 
   github-token:
-    description: 'GitHub token used by YosysHQ/setup-oss-cad-suite.'
-    required: false
+    description: GitHub token used by YosysHQ/setup-oss-cad-suite.
+
+  install-zig:
+    description: Install Zig (specify version).
 
 runs:
   using: 'composite'
@@ -73,4 +74,15 @@ runs:
   - name: Report Yosys version
     if: ${{ inputs.install-oss-cad-suite }}
     run: yosys --version
+    shell: bash
+
+  - name: Install Zig
+    if: ${{ inputs.install-zig }}
+    uses: goto-bus-stop/setup-zig@v2
+    with:
+      version: ${{ inputs.install-zig }}
+
+  - name: Report Zig version
+    if: ${{ inputs.install-zig }}
+    run: zig version
     shell: bash
