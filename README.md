@@ -1,9 +1,9 @@
-# setup-chryse-action
+# setup-chryse
 
 Install dependencies for [Chryse], and optionally the library itself from source. [action.yml] is an easy read.
 
 [Chryse]: https://github.com/chryse-hdl/chryse
-[action.yml]: https://github.com/chryse-hdl/setup-chryse-action/blob/v2.3/action.yml
+[action.yml]: https://github.com/chryse-hdl/setup-chryse/blob/v2/action.yml
 
 ## Base usage
 
@@ -17,7 +17,7 @@ Install:
 
 ```yaml
 - name: Set up Chryse
-  uses: chryse-hdl/setup-chryse-action@v2.3
+  uses: chryse-hdl/setup-chryse@v2
 ```
 
 ### OSS CAD Suite
@@ -29,10 +29,23 @@ The suite's Verilator install is used instead of getting it from apt.
 
 ```yaml
 - name: Set up Chryse
-  uses: chryse-hdl/setup-chryse-action@v2.3
+  uses: chryse-hdl/setup-chryse@v2
   with:
     install-oss-cad-suite: true
     github-token: ${{ secrets.GITHUB_TOKEN }}
+```
+
+### Zig
+
+Additionally install Zig using [goto-bus-stop/setup-zig].
+
+[goto-bus-stop/setup-zig]: https://github.com/goto-bus-stop/setup-zig
+
+```yaml
+- name: Set up Chryse
+  uses: chryse-hdl/setup-chryse@v2
+  with:
+    install-zig: 0.13.0
 ```
 
 ### Chryse from source
@@ -41,7 +54,7 @@ Clone [Chryse] and `sbt publishLocal` a particular ref of it.
 
 ```yaml
 - name: Set up Chryse
-  uses: chryse-hdl/setup-chryse-action@v2.3
+  uses: chryse-hdl/setup-chryse@v2
   with:
     source-ref: main
 ```

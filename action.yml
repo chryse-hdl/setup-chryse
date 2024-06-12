@@ -14,7 +14,7 @@ inputs:
     description: GitHub token used by YosysHQ/setup-oss-cad-suite.
 
   install-zig:
-    description: Install Zig (specify version).
+    description: Install Zig with specified version.
 
 runs:
   using: 'composite'
