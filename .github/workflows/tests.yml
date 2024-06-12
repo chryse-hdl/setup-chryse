@@ -27,3 +27,13 @@ jobs:
 
       - name: Ensure sbt is found by calling action
         run: sbt --version
+
+  test-zig:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Chryse with Zig (use this repo)
+        uses: ./.
+        with:
+          install-zig: 0.13.0
